@@ -368,15 +368,15 @@ window.SIM_CONTENT = {
      "res": [
       [
        "Tier A",
-       "$52.0M"
+       "$50.1M"
       ],
       [
        "Tier B",
-       "$101.8M"
+       "$98.7M"
       ],
       [
        "Tier C",
-       "$40.2M"
+       "$39.1M"
       ]
      ],
      "note": "Shows where revenue sits, not how reliable anyone is."
@@ -433,11 +433,11 @@ window.SIM_CONTENT = {
    "title": "“Revenue is several times higher in the new view”",
    "from": "Anil Bhatia · Finance Controller",
    "time": "Thu 6:15 PM",
-   "msg": "The new 'Orders + Stock' view shows revenue several times higher than the $193.99M on the Executive Summary, and all 2023 months are blank. Which number goes to the CFO?",
+   "msg": "The new 'Orders + Stock' view shows revenue several times higher than the $187.98M on the Executive Summary, and all 2023 months are blank. Which number goes to the CFO?",
    "metric": [
     [
      "Executive Summary revenue",
-     "$193.99M"
+     "$187.98M"
     ],
     [
      "New 'Orders + Stock' view",
@@ -560,8 +560,8 @@ window.SIM_CONTENT = {
      "Delete 2023 orders so both facts cover the same year"
     ]
    ],
-   "answer": "Root cause: fact-to-fact join fan-out. Each 2024 order line was repeated once per monthly snapshot, and 2023 orders vanished in the inner join. Revenue from Fact_Orders alone is <b>$193,992,801</b>.",
-   "tell": "“Use $193.99M. The new view joined orders straight to monthly stock snapshots, so 2024 orders were counted many times and 2023 dropped out. Orders and stock now meet only through the shared product and warehouse dimensions, with a row-count check.”"
+   "answer": "Root cause: fact-to-fact join fan-out. Each 2024 order line was repeated once per monthly snapshot, and 2023 orders vanished in the inner join. Revenue from Fact_Orders alone is <b>$187,981,061</b>.",
+   "tell": "“Use $187.98M. The new view joined orders straight to monthly stock snapshots, so 2024 orders were counted many times and 2023 dropped out. Orders and stock now meet only through the shared product and warehouse dimensions, with a row-count check.”"
   }
  ],
  "broken": {
@@ -572,9 +572,9 @@ window.SIM_CONTENT = {
    {
     "id": "t1",
     "label": "Total Revenue",
-    "val": "$193.99M",
+    "val": "$187.98M",
     "bad": false,
-    "why": "Correct: SUM(Revenue) from Fact_Orders = $193,992,801."
+    "why": "Correct: SUM(Revenue) from Fact_Orders = $187,981,061."
    },
    {
     "id": "t2",
@@ -595,7 +595,7 @@ window.SIM_CONTENT = {
     "label": "Fill Rate",
     "val": "96.8%",
     "bad": false,
-    "why": "Correct: SUM(Shipped_Quantity) ÷ SUM(Order_Quantity) × 100 (or AVERAGE(Fill_Rate_Pct)), above the 95% target."
+    "why": "Correct: SUM(Shipped_Quantity) ÷ SUM(Order_Quantity) × 100, above the 95% target."
    },
    {
     "id": "t5",

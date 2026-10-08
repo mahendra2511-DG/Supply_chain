@@ -1444,7 +1444,7 @@ body.dark-mode img.tool-logo, body.dark-mode img.doc-icon { background: #fff; bo
 <meta http-equiv="Cache-Control" content="no-cache">
 <link rel="stylesheet" href="schedule-kit.css?v=20261007-scm">
 <link rel="stylesheet" href="sim-kit.css?v=20261008-sim">
-<link rel="stylesheet" href="progress-kit.css?v=20261008-hub">
+<link rel="stylesheet" href="progress-kit.css?v=20261008-home">
 </head>
 <body>
 
@@ -1480,6 +1480,7 @@ body.dark-mode img.tool-logo, body.dark-mode img.doc-icon { background: #fff; bo
       <div class="nav-group-label">Analytics</div>
       <button data-view="kpis"><span class="ic">📊</span><span class="lbl">KPI List</span></button>
       <button data-view="sql"><span class="ic">🗄️</span><span class="lbl">SQL &amp; QA Lab</span></button>
+      <button data-view="editor"><span class="ic">⌨️</span><span class="lbl">SQL Practice Editor</span><span class="nav-live">LIVE</span></button>
 
       <div class="nav-group-label">Dashboards</div>
       <button data-view="dashboards"><span class="ic">📈</span><span class="lbl">Sample Dashboards</span></button>
@@ -1563,6 +1564,40 @@ body.dark-mode img.tool-logo, body.dark-mode img.doc-icon { background: #fff; bo
     <div class="pulse-rule mt-40">
       <svg viewBox="0 0 1200 28" preserveAspectRatio="none"><path d="M0,14 L380,14 L410,4 L430,24 L450,14 L1200,14"/></svg>
     </div>
+
+    <div class="section-head mt-40" style="margin-bottom:14px;"><div class="eyebrow">How it works</div><h2>Practise like it's a daily habit</h2></div>
+    <div class="how-grid">
+      <div class="how-step"><span>1</span><h4>Pick today's 3 problems</h4><p>Easy, Medium and Advanced, picked fresh every day from this project's data.</p></div>
+      <div class="how-step"><span>2</span><h4>Write real SQL</h4><p>The SQL Practice Editor runs SQLite in your browser on the project tables. No install.</p></div>
+      <div class="how-step"><span>3</span><h4>Check your answer</h4><p>Your result is compared with the expected one: rows, columns and values.</p></div>
+      <div class="how-step"><span>4</span><h4>Keep the streak 🔥</h4><p>Solve a little every day; your streak and progress are saved on this device.</p></div>
+    </div>
+    <div class="card progress-mini mt-16" id="home-progress"></div>
+
+    <div class="section-head mt-40" id="journey-anchor">
+      <div class="eyebrow">🚀 Your Learning Journey</div>
+      <h2>Ten steps, in this order: don't skip ahead</h2>
+      <p>Each step builds on the previous one. Click <strong>Start →</strong> to open the page for that step, then mark it done.</p>
+    </div>
+    <div class="roadmap-cta card">
+      <div><h4>🗺️ New to data analytics? See the full Data Analyst Roadmap</h4><p>This project covers one part of the journey. The roadmap shows every skill a data analyst needs, from Excel and SQL to statistics and visualization, in the order to learn them.</p></div>
+      <a class="btn-sky" href="https://roadmap.sh/data-analyst" target="_blank" rel="noopener">Open Data Analyst Roadmap ↗</a>
+    </div>
+    <div class="journey" id="journey"></div>
+
+    <div class="section-head mt-40">
+      <div class="eyebrow">🎯 Project Deliverables</div>
+      <h2>What you should have in hand when the project is complete</h2>
+      <p>Tick each deliverable as you finish it. This is also exactly what to show in a portfolio or an interview walkthrough.</p>
+    </div>
+    <div class="deliv-grid" id="deliv-grid"></div>
+
+    <div class="section-head mt-40">
+      <div class="eyebrow">Before vs After</div>
+      <h2>What changes when supply chain reporting moves from exports to analytics</h2>
+      <p>Use this exact contrast when an interviewer asks "what was the value of your project?"</p>
+    </div>
+    <div class="ba-grid" id="before-after"></div>
 
     <div class="section-head mt-40">
       <div class="eyebrow">Tools used in this capstone</div>
@@ -1963,6 +1998,59 @@ body.dark-mode img.tool-logo, body.dark-mode img.doc-icon { background: #fff; bo
   </div>
 </section>
 
+<!-- ===================== SQL PRACTICE EDITOR ===================== -->
+<section class="view" id="view-editor">
+  <div class="wrap wide">
+    <div class="section-head">
+      <div class="eyebrow">⌨️ SQL Practice Editor · runs in your browser</div>
+      <h2>Problemset: SQL on the Supply Chain data</h2>
+      <p>24 problems (8 Easy · 8 Medium · 8 Advanced) on 6 practice tables from the supply chain dataset: 12,000 orders, 6,228 monthly inventory snapshots, and the customer, product, supplier and warehouse dimensions. The editor uses SQLite syntax; the full MySQL scripts are in the SQL Lab.</p>
+    </div>
+    <div id="ed-browse">
+      <div class="ps-cards">
+        <div class="ps-card ps-teal"><span class="ps-tag">DAILY 3 SET</span><h4>Today's Challenge</h4><p id="ps-today-sub">1 Easy · 1 Medium · 1 Advanced</p><button class="ps-go" id="ps-today-go">Solve today's set →</button></div>
+        <div class="ps-card ps-violet"><span class="ps-tag">PROGRESS</span><h4 id="ps-progress">0 / 24 Solved</h4><p id="ps-streak">0 day streak</p></div>
+        <div class="ps-card ps-amber"><span class="ps-tag">INTERVIEW PREP</span><h4>450+ SQL & BI questions</h4><p><a href="https://www.crackanalytics.com/" target="_blank" rel="noopener">CrackAnalytics ↗</a></p></div>
+      </div>
+      <div class="ps-grid">
+        <div class="ps-main">
+          <div class="ps-topics" id="ps-topics"></div>
+          <div class="ps-filters card">
+            <div class="ps-tables" id="ps-tables"></div>
+            <div class="ps-seg" id="ps-levels"></div>
+          </div>
+          <div class="ps-tools">
+            <input class="search-input" id="ps-search" type="text" placeholder="Search problems by name or number…">
+            <select id="ps-status"><option value="all">Status: All</option><option value="todo">Unsolved</option><option value="done">Solved</option></select>
+            <button class="btn-outline" id="ps-random">⤮ Pick Random</button>
+          </div>
+          <div class="card ps-table-wrap"><table class="ps-table"><thead><tr><th>Status</th><th>Title</th><th>Time</th><th>Difficulty</th><th>Solve</th></tr></thead><tbody id="ps-rows"></tbody></table></div>
+        </div>
+        <aside class="ps-side">
+          <div class="card ps-cal" id="ps-cal"></div>
+          <div class="card ps-tablesinfo"><strong>Practice tables</strong><p>6 tables from the supply chain dataset (they load the first time you open the editor). Open a problem to see columns.</p><div id="ps-tablelist"></div></div>
+        </aside>
+      </div>
+    </div>
+    <div id="ed-solve" style="display:none;">
+      <div class="ed-solve-bar"><button class="btn-outline" id="ed-back">← Problemset</button><span id="ed-pos"></span><button class="btn-outline" id="ed-prev">‹ Prev</button><button class="btn-outline" id="ed-next">Next ›</button></div>
+      <div class="ed-shell two">
+        <div class="ed-main">
+          <div class="card ed-problem"><h3 id="ed-title"></h3><p id="ed-task"></p><div id="ed-tables" class="ed-tables"></div></div>
+          <div class="ed-editor card">
+            <div class="ed-bar"><span class="ed-dots"><i></i><i></i><i></i></span><span class="ed-file">query.sql</span>
+              <div class="ed-actions"><button class="btn-outline" id="ed-hint">💡 Hint</button><button class="btn-outline" id="ed-solution">🔓 Solution</button><button class="btn-outline" id="ed-reset">↺ Reset</button><button class="btn-blue" id="ed-run">▶ Run</button><button class="btn-ai" id="ed-check">✓ Submit</button></div></div>
+            <textarea id="ed-sql" spellcheck="false" aria-label="SQL editor"></textarea>
+          </div>
+          <div id="ed-msg"></div>
+          <div class="card ed-out" id="ed-out"></div>
+        </div>
+        <aside class="ed-schema card"><strong>Tables</strong><p style="font-size:12px;color:var(--ink-muted);margin:4px 0 8px;">Click a column to insert it.</p><div id="ed-schema"></div></aside>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== JOB SIMULATOR ===================== -->
 <section class="view" id="view-incident">
   <div class="wrap">
@@ -2281,7 +2369,7 @@ const KPIS = [
   { name: "Revenue by Ship Mode", desc: "Which shipping modes actually carry the most order value, not just the most orders.", formula: "SUM(Revenue) GROUP BY Ship_Mode", table: "Fact_Orders", cat: "Logistics & Delivery", prio: "P2" },
 
   // Fulfillment
-  { name: "Fill Rate %", desc: "Share of ordered quantity actually shipped — target ≥ 95%. Fill_Rate_Pct is a precomputed column in this dataset.", formula: "AVERAGE(Fill_Rate_Pct)  — equivalently SUM(Shipped_Quantity) ÷ SUM(Order_Quantity) × 100", table: "Fact_Orders", cat: "Fulfillment", prio: "P1" },
+  { name: "Fill Rate %", desc: "Share of ordered quantity actually shipped — target ≥ 95%. Fill_Rate_Pct is a precomputed column in this dataset.", formula: "SUM(Shipped_Quantity) ÷ SUM(Order_Quantity) × 100 (Fill_Rate_Pct holds the same ratio for each order line)", table: "Fact_Orders", cat: "Fulfillment", prio: "P1" },
   { name: "Perfect Order Rate %", desc: "Share of orders that were both on-time AND fully filled — the composite quality metric, target ≥ 85%.", formula: "COUNT(Delivery_Status='On-Time' AND Fill_Rate_Pct=100) ÷ COUNT(Orders) × 100", table: "Fact_Orders", cat: "Fulfillment", prio: "P1" },
   { name: "Delivery Status Mix", desc: "The full On-Time / Slightly Delayed / Delayed breakdown — OTD alone hides whether the misses are close calls or badly late.", formula: "COUNT(Order_ID) GROUP BY Delivery_Status", table: "Fact_Orders", cat: "Fulfillment", prio: "P2" },
   { name: "Partial Shipment Rate %", desc: "Share of orders shipped short of what was ordered — the operational cause behind a soft Fill Rate.", formula: "COUNT(WHERE Shipped_Quantity < Order_Quantity) ÷ COUNT(Orders) × 100", table: "Fact_Orders", cat: "Fulfillment", prio: "P2" },
@@ -2501,7 +2589,7 @@ const DASH_MOCKS = [
     title: "Executive Summary",
     sub: "Computed directly from the dataset — 12,000 order lines, Jan 2023–Dec 2024",
     kpis: [
-      { v: "$193.99M", l: "Total Revenue" },
+      { v: "$187.98M", l: "Total Revenue" },
       { v: "36.2%", l: "Gross Margin %" },
       { v: "66.0%", l: "On-Time Delivery" },
       { v: "96.8%", l: "Fill Rate" },
@@ -2607,7 +2695,7 @@ HAVING COUNT(*) > 1;`
   {
     title: "5 · Dashboard Aggregation Check",
     desc: "Compare SQL sum/average output against the equivalent Power BI or Tableau card — these are the exact KPI formulas from the BRD, with the actual values this dataset should produce.",
-    sql: `SELECT SUM(Revenue) FROM Fact_Orders;                                    -- ≈ $193,992,801
+    sql: `SELECT SUM(Revenue) FROM Fact_Orders;                                    -- ≈ $187,981,061
 SELECT (SUM(Revenue) - SUM(COGS)) / SUM(Revenue) * 100 FROM Fact_Orders; -- ≈ 36.2%
 SELECT AVG(Delay_Days) FROM Fact_Orders WHERE Delay_Days > 0;            -- ≈ 4.29 days
 SELECT COUNT(*) FROM Fact_Orders WHERE Delivery_Status = 'On-Time';       -- ≈ 7,924 rows (66.0%)
@@ -2641,9 +2729,9 @@ const TIER_CASE_STUDY = {
   scorecard: {
     headers: ["Tier", "Suppliers", "Orders", "OTD %", "Slightly Delayed", "Delayed", "Avg Delay (days)", "Median", "P90 Delay", "Revenue"],
     rows: [
-      ["A", "12", "4,007", "70.0%", "18.2%", "11.8%", "1.12", "0", "4.0", "$52.0M"],
-      ["B", "15", "5,962", "65.6%", "18.6%", "15.8%", "1.49", "0", "5.0", "$101.8M"],
-      ["C", "5", "2,031", "59.6%", "19.6%", "20.8%", "2.03", "0", "7.0", "$40.2M"],
+      ["A", "12", "4,007", "70.0%", "18.2%", "11.8%", "1.12", "0", "4.0", "$50.1M"],
+      ["B", "15", "5,962", "65.6%", "18.6%", "15.8%", "1.49", "0", "5.0", "$98.7M"],
+      ["C", "5", "2,031", "59.6%", "19.6%", "20.8%", "2.03", "0", "7.0", "$39.1M"],
     ],
   },
   pattern: [
@@ -4589,12 +4677,15 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 <script>document.write('<script src="schedule-config.js?t=' + Date.now() + '"><\/script>');</script>
 <script>document.write('<script src="project-schedule.js?t=' + Date.now() + '"><\/script>');</script>
+<script>window.SITE_V = "20261008-data";</script>
 <script src="schedule-kit.js?v=20261007-scm"></script>
+<script src="editor-kit.js?v=20261008-data"></script>
 <script src="sim-content.js?v=20261008-sim"></script>
-<script>window.SIM_CFG = {"key": "scm_hub", "syncKeys": ["supply_chain_prep_progress_v1", "scm_hub_journey_v1"], "editorKey": null, "sqlTotal": null};</script>
+<script>window.SIM_CFG = {"key": "scm_hub", "syncKeys": ["supply_chain_prep_progress_v1", "scm_hub_journey_v1", "scm_hub_editor_v1"], "editorKey": "scm_hub_editor_v1", "sqlTotal": 24};</script>
 <script src="sim-kit.js?v=20261008-sim"></script>
+<script src="home-content.js?v=20261008-ed"></script>
 <script>window.PROG_CFG = {"key": "scm_hub"};</script>
-<script src="progress-kit.js?v=20261008-hub"></script>
+<script src="progress-kit.js?v=20261008-home"></script>
 <script>window.VISIT_KEY = "scm_hub";</script>
 <script src="visit-kit.js?v=20261008-sim"></script>
 </body>
