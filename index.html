@@ -1446,6 +1446,7 @@ body.dark-mode img.tool-logo, body.dark-mode img.doc-icon { background: #fff; bo
 <link rel="stylesheet" href="sim-kit.css?v=20261008-sim">
 <link rel="stylesheet" href="progress-kit.css?v=20261008-home">
 <style id="soc-ico-css">.soc-ico{width:17px;height:17px;flex:none;display:inline-block;vertical-align:-3px;margin-right:7px}#side-youtube,#side-medium,#side-linkedin,#social-youtube,#social-medium,#social-linkedin{display:inline-flex;align-items:center}.cmdk-fab-hint{display:none!important}a>.soc-ico{margin-right:5px}a:has(>.soc-ico){display:inline-flex;align-items:center}</style>
+<style id="rv-nav-css">#nav button .nav-ai{margin-left:auto;font-size:9.5px;font-weight:800;letter-spacing:.04em;padding:1px 6px;border-radius:5px;background:#7C3AED;color:#fff}#nav button[data-view="review"] .lbl{line-height:1.25}</style>
 </head>
 <body>
 
@@ -1485,6 +1486,7 @@ body.dark-mode img.tool-logo, body.dark-mode img.doc-icon { background: #fff; bo
 
       <div class="nav-group-label">Dashboards</div>
       <button data-view="dashboards"><span class="ic">📈</span><span class="lbl">Sample Dashboards</span></button>
+      <button data-view="review"><span class="ic">🧪</span><span class="lbl">Mahendra Dashboard Evaluation Feedback</span><span class="nav-ai">AI</span></button>
 
       <div class="nav-group-label">Job Simulator</div>
       <button data-view="incident"><span class="ic">🚨</span><span class="lbl">Incident Room</span><span class="nav-live">NEW</span></button>
@@ -1809,6 +1811,10 @@ body.dark-mode img.tool-logo, body.dark-mode img.doc-icon { background: #fff; bo
 </section>
 
 <!-- ===================== MY PROGRESS ===================== -->
+<section class="view" id="view-review">
+  <div class="wrap"><div id="rv-root"></div></div>
+</section>
+
 <section class="view" id="view-progress">
   <div class="wrap">
     <div class="section-head">
@@ -4679,7 +4685,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>document.write('<script src="schedule-config.js?t=' + Date.now() + '"><\/script>');</script>
 <script>document.write('<script src="project-schedule.js?t=' + Date.now() + '"><\/script>');</script>
 <script>window.SITE_V = "20261008-data";</script>
-<script src="schedule-kit.js?v=20261015-b"></script>
+<script src="schedule-kit.js?v=20261018-rv"></script>
 <script src="editor-kit.js?v=20261008-data"></script>
 <script src="sim-content.js?v=20261008-sim"></script>
 <script>window.SIM_CFG = {"key": "scm_hub", "syncKeys": ["supply_chain_prep_progress_v1", "scm_hub_journey_v1", "scm_hub_editor_v1"], "editorKey": "scm_hub_editor_v1", "sqlTotal": 24};</script>
@@ -4689,6 +4695,8 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="progress-kit.js?v=20261008-home"></script>
 <script>window.VISIT_KEY = "scm_hub";</script>
 <script src="visit-kit.js?v=20261015-b"></script>
-<script src="ai-kit.js?v=20261015-ai" defer></script>
+<script src="ai-kit.js?v=20261015-ai2" defer></script>
+<script src="review-config.js?v=20261018-rv"></script>
+<script src="review-kit.js?v=20261018-wf" defer></script>
 </body>
 </html>
