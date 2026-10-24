@@ -510,4 +510,5 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (ev) => { const b = ev.target.closest && ev.target.closest('[data-view="editor"],[data-goto="editor"]'); if (b) setTimeout(initEditor, 0); });
 })();
 
+window.__ED = { problems: PRACTICE_PROBLEMS, state: edState, cur: () => edCur, run: edRun };   // read-only access for Dexa Coach (SQL Tutor + certificate)
 })();
